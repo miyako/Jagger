@@ -14,7 +14,7 @@ $zip:=cs._Zip.new($model)
 $zip.create()
 ```
 
-リリース名に辞書名を設定します。
+リリース名を辞書名に合わせます。
 
 https://github.com/miyako/Jagger/releases/tag/kyoto%2Bkwdlc
 
