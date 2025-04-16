@@ -37,7 +37,7 @@ $pos:=$status.extract("pos")
 ALERT($pos.join(","))
 ```
 
-![](https://github.com/user-attachments/assets/f7932cc1-8250-4aa0-b436-8418290fd094)
+<img src="https://github.com/user-attachments/assets/f7932cc1-8250-4aa0-b436-8418290fd094" width=400 height=auto />
 
 コンストラクターが必要に応じてGitHubからデフォルトの辞書をインストールします。
 
