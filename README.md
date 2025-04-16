@@ -7,7 +7,6 @@
 まずZip形式で圧縮しておきます。  
 
 * ファイル名は常に`model.zip`
-* フォルダーは含めない
   
 ```4d
 $model:=Folder("/RESOURCES/model/kyoto+kwdlc")
@@ -19,7 +18,14 @@ $zip.create()
 
 https://github.com/miyako/Jagger/releases/tag/kyoto%2Bkwdlc
 
- 辞書はReleasesから.zip形式でダウンロードします。
+Releasesから.zip形式の辞書をダウンロードして展開します。
+
+```4d
+$model:=cs._Model.new("kyoto+kwdlc")
+If (Not($model.exists))
+	$model.install()
+End if
+```
 
 ## つかいかた
 
