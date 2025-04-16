@@ -20,7 +20,7 @@ Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 	If ($worker.dataType="text")
 		var $lines : Collection
-		$lines:=Split string:C1554($worker.response; "\n")
+		$lines:=Split string:C1554($worker.response; This:C1470.instance.EOL)
 		
 		For each ($line; $lines)
 			$v:=Split string:C1554($line; "\t")

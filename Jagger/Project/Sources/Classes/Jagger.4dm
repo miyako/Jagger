@@ -39,7 +39,11 @@ Function words($text : Text; $segmentationOnly : Boolean) : Collection
 	If ($text#"")
 		$command:=This:C1470.escape(This:C1470.executablePath)
 		$command+=" -m "
-		$command+=This:C1470.escape(This:C1470.model.path)
+		If (Is macOS:C1572)
+			$command+=This:C1470.escape(This:C1470.model.path)
+		Else 
+			$command+=This:C1470.escape(This:C1470.model.platformPath)
+		End if 
 		
 		If ($segmentationOnly)
 			$command+=" -w"
