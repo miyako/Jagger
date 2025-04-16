@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="7">
+	<com.4d>
+		<general component_classStore_name="Jagger" startup_environnement="0"/>
+		<compiler>
+			<typage default_for_button="2" default_for_numeric="1"/>
+			<options target="all"/>
+		</compiler>
+		<interface>
+			<user sdi_application="true"/>
+		</interface>
+	</com.4d>
+</preferences>
