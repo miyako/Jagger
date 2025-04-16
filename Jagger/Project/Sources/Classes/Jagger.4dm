@@ -10,7 +10,13 @@ Class constructor($controller : 4D:C1709.Class)
 	Super:C1705("jagger"; $controller=Null:C1517 ? cs:C1710._Jagger_Controller : $controller)
 	
 	//%W-550.26
-	This:C1470.JAGGER_DEFAULT_MODEL:=This:C1470.expand(Folder:C1567("/RESOURCES/model/kyoto+kwdlc"))
+	
+	$model:=cs:C1710._Model.new("kyoto+kwdlc")
+	If (Not:C34($model.exists))
+		$model.install()
+	End if 
+	
+	This:C1470.JAGGER_DEFAULT_MODEL:=This:C1470.expand($model.folder)
 	This:C1470._model:=This:C1470.JAGGER_DEFAULT_MODEL
 	//%W+550.26
 	
