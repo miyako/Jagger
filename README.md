@@ -1,6 +1,26 @@
 # Jagger
 形態素解析器
 
+ ## 辞書の管理
+
+辞書は別途GitHubからダウンロードする設計です。  
+まずZip形式で圧縮しておきます。  
+
+* ファイル名は常に`model.zip`
+* フォルダーは含めない
+  
+```4d
+$model:=Folder("/RESOURCES/model/kyoto+kwdlc")
+$zip:=cs._Zip.new($model)
+$zip.create()
+```
+
+リリース名に辞書名を設定します。
+
+https://github.com/miyako/Jagger/releases/tag/kyoto%2Bkwdlc
+
+ 辞書はReleasesから.zip形式でダウンロードします。
+
 ## つかいかた
 
 ```4d
