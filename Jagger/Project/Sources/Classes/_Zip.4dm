@@ -1,8 +1,8 @@
 property model : 4D:C1709.Folder
 
-Class constructor($model : 4D:C1709.Folder)
+Class constructor($model : Object)
 	
-	If (OB Instance of:C1731($model; 4D:C1709.Folder)) && ($model.exists)
+	If ((OB Instance of:C1731($model; 4D:C1709.Folder)) || (OB Instance of:C1731($model; 4D:C1709.File))) && ($model.exists)
 		
 		This:C1470.model:=$model
 		
@@ -13,7 +13,14 @@ Function create() : cs:C1710._Zip
 	If (This:C1470.model#Null:C1517)
 		
 		var $zip : Object
-		$zip:={files: This:C1470.model.files(fk ignore invisible:K87:22)}
+		
+		Case of 
+			: (OB Instance of:C1731(This:C1470.model; 4D:C1709.Folder))
+				$zip:={files: This:C1470.model.files(fk ignore invisible:K87:22)}
+			: (OB Instance of:C1731(This:C1470.model; 4D:C1709.File))
+				$zip:={files: [This:C1470.model]}
+		End case 
+		
 		$zip.compression:=ZIP Compression LZMA:K91:9
 		$zip.level:=5
 		$dst:=This:C1470.model.parent.file(This:C1470.model.name+".zip")

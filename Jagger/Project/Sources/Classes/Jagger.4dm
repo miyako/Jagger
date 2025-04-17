@@ -12,7 +12,7 @@ Class constructor($controller : 4D:C1709.Class)
 	
 	//%W-550.26
 	
-	$model:=cs:C1710._Model.new("kyoto+kwdlc")
+	$model:=cs:C1710.Model.new("kyoto+kwdlc")
 	If (Not:C34($model.exists))
 		$model.install()
 	End if 

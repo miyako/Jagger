@@ -5,7 +5,7 @@ If (False:C215)
 	$zip.create()
 End if 
 
-$model:=cs:C1710._Model.new("kyoto+kwdlc")
+$model:=cs:C1710.Model.new("kyoto+kwdlc")
 If (Not:C34($model.exists))
 	$model.install()
 End if 

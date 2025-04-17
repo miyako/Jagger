@@ -3,7 +3,6 @@ Class extends _HTTP
 property name : Text
 property folder : 4D:C1709.Folder
 property URL : Text
-property get : Boolean
 
 Class constructor($name : Text)
 	
@@ -24,13 +23,13 @@ Class constructor($name : Text)
 	
 	This:C1470.folder:=$folder
 	
-Function install() : cs:C1710._Model
+Function install() : cs:C1710.Model
 	
 	CALL WORKER:C1389("ghdownload"; This:C1470._download; This:C1470)
 	
 	return This:C1470
 	
-Function _download($model : cs:C1710._Model)
+Function _download($model : cs:C1710.Model)
 	
 	$request:=4D:C1709.HTTPRequest.new($model.URL; $model)
 	
@@ -60,7 +59,7 @@ Function onResponse($request : 4D:C1709.HTTPRequest; $event : Object)
 	
 Function get exists : Boolean
 	
-	If (This:C1470.folder.exists)
+	If (This:C1470.folder#Null:C1517) && (This:C1470.folder.exists)
 		
 		var $file : Text
 		For each ($file; ["patterns"; "patterns.c2i"; "patterns.da"; "patterns.fs"; "patterns.p2f"])
