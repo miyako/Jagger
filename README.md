@@ -21,7 +21,7 @@ https://github.com/miyako/Jagger/releases/tag/kyoto%2Bkwdlc
 Releasesから.zip形式の辞書をダウンロードして展開します。
 
 ```4d
-$model:=cs._Model.new("kyoto+kwdlc")
+$model:=cs.Jagger.Model.new("kyoto+kwdlc")
 If (Not($model.exists))
 	$model.install()
 End if
@@ -30,8 +30,8 @@ End if
 ## つかいかた
 
 ```4d
-var $Jagger : cs.Jagger
-$Jagger:=cs.Jagger.new()
+var $Jagger : cs.Jagger.Jagger
+$Jagger:=cs.Jagger.Jagger.new()
 
 $text:="Jagger は、辞書に基づく単語分割のための最長一致法と、機械学習の分類器の事前計算に着想を得た、特徴パターンに基づく高速・高精度・省メモリの形態素解析器です。"
 $status:=$Jagger.split($text)
