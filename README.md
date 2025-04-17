@@ -52,7 +52,6 @@ ALERT(JSON Stringify($status; *))
 
 ## 注記
 
-* 改行コード（両プラットフォーム`\n`）までが解析されます。
 * コンストラクターが必要に応じてGitHubからデフォルトの辞書をインストールします。
 
 ## aknowlegements
