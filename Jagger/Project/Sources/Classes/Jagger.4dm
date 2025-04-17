@@ -1,5 +1,6 @@
 property model : 4D:C1709.Folder
 property data : Collection
+property segmentationOnly : Boolean
 
 Class extends _CLI
 
@@ -40,7 +41,15 @@ Function get controller() : cs:C1710._Jagger_Controller
 	return This:C1470._controller
 	//%W+550.26
 	
-Function words($text : Text; $segmentationOnly : Boolean) : Collection
+Function analyze($text) : Collection
+	
+	return This:C1470._run($text; False:C215)
+	
+Function split($text) : Collection
+	
+	return This:C1470._run($text; True:C214)
+	
+Function _run($text : Text; $segmentationOnly : Boolean) : Collection
 	
 	If ($text#"")
 		$command:=This:C1470.escape(This:C1470.executablePath)
@@ -55,6 +64,7 @@ Function words($text : Text; $segmentationOnly : Boolean) : Collection
 			$command+=" -w"
 		End if 
 		
+		This:C1470.segmentationOnly:=$segmentationOnly
 		This:C1470.controller.execute($command)
 		This:C1470.worker.postMessage($text)
 		This:C1470.worker.closeInput()

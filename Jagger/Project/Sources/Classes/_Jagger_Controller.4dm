@@ -19,17 +19,22 @@ Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	$values:=[]
 	
 	If ($worker.dataType="text")
-		var $lines : Collection
-		$lines:=Split string:C1554($worker.response; This:C1470.instance.EOL)
-		
-		For each ($line; $lines)
-			$v:=Split string:C1554($line; "\t")
-			If ($v.length=2)
-				$values.push({pos: $v[0]; dic: Split string:C1554($v[1]; ",")})
+		Case of 
+			: (This:C1470.instance.segmentationOnly)
+				$values:=Split string:C1554($worker.response; " "; sk trim spaces:K86:2 | sk ignore empty strings:K86:1)
 			Else 
-				break
-			End if 
-		End for each 
+				var $lines : Collection
+				$lines:=Split string:C1554($worker.response; This:C1470.instance.EOL)
+				
+				For each ($line; $lines)
+					$v:=Split string:C1554($line; "\t")
+					If ($v.length=2)
+						$values.push({pos: $v[0]; dic: Split string:C1554($v[1]; ",")})
+					Else 
+						break
+					End if 
+				End for each 
+		End case 
 	End if 
 	
 	This:C1470.instance.data:=$values
