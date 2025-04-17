@@ -39,6 +39,10 @@ ALERT($pos.join(","))
 
 <img src="https://github.com/user-attachments/assets/f7932cc1-8250-4aa0-b436-8418290fd094" width=400 height=auto />
 
+## 注記
+
+* 改行コード（両プラットフォーム`\n`）までが解析されます。
+
 コンストラクターが必要に応じてGitHubからデフォルトの辞書をインストールします。
 
 ## aknowlegements
