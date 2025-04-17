@@ -1,0 +1,306 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 730,
+	"windowMinHeight": 494,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onUnload"
+	],
+	"windowTitle": "Jagger",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"OK": {
+					"type": "button",
+					"text": "OK",
+					"top": 453,
+					"left": 620,
+					"width": 90,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"sizingX": "move",
+					"sizingY": "move",
+					"action": "accept",
+					"focusable": false
+				},
+				"tokens": {
+					"type": "listbox",
+					"left": 20,
+					"top": 179,
+					"width": 690,
+					"height": 255,
+					"events": [
+						"onSelectionChange"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.tokens.col",
+					"currentItemSource": "Form:C1466.tokens.item",
+					"currentItemPositionSource": "Form:C1466.tokens.pos",
+					"selectedItemsSource": "Form:C1466.tokens.sel",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "transparent",
+					"resizingMode": "legacy",
+					"alternateFill": "automaticAlternate",
+					"sortable": false,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"staticColumnCount": 8,
+					"right": 710,
+					"columns": [
+						{
+							"header": {
+								"text": "表層形",
+								"name": "Header1"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"truncateMode": "none",
+							"dataSource": "This:C1470.pos",
+							"enterable": false,
+							"width": 100,
+							"resizable": true
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "品詞"
+							},
+							"name": "Column2",
+							"enterable": false,
+							"dataSource": "This:C1470.dic[0]",
+							"footer": {
+								"name": "Footer2"
+							},
+							"width": 60,
+							"resizable": true,
+							"truncateMode": "none"
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "品詞細分類1"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"width": 70,
+							"resizable": true,
+							"dataSource": "This:C1470.dic[1]",
+							"truncateMode": "none",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": "品詞細分類2"
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"width": 70,
+							"resizable": true,
+							"dataSource": "This:C1470.dic[2]",
+							"truncateMode": "none",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header5",
+								"text": "品詞細分類3"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer5"
+							},
+							"width": 70,
+							"resizable": true,
+							"dataSource": "This:C1470.dic[3]",
+							"enterable": false,
+							"truncateMode": "none"
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "原形"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							},
+							"width": 90,
+							"dataSource": "This:C1470.dic[4]",
+							"enterable": false,
+							"resizable": true,
+							"truncateMode": "none"
+						},
+						{
+							"header": {
+								"name": "Header7",
+								"text": "読み"
+							},
+							"name": "Column7",
+							"footer": {
+								"name": "Footer7"
+							},
+							"width": 90,
+							"dataSource": "This:C1470.dic[5]",
+							"enterable": false,
+							"resizable": true,
+							"truncateMode": "none"
+						},
+						{
+							"header": {
+								"name": "Header8",
+								"text": "出典"
+							},
+							"name": "Column8",
+							"dataSource": "This:C1470.dic[6]",
+							"footer": {
+								"name": "Footer8"
+							},
+							"resizable": true,
+							"enterable": false,
+							"width": 0,
+							"truncateMode": "none"
+						}
+					]
+				},
+				"text": {
+					"type": "input",
+					"left": 20,
+					"top": 20,
+					"width": 690,
+					"height": 105,
+					"dataSource": "Form:C1466.text",
+					"sizingY": "fixed",
+					"sizingX": "grow",
+					"right": 710
+				},
+				"split": {
+					"type": "button",
+					"text": "split",
+					"top": 140,
+					"left": 20,
+					"width": 90,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"action": "",
+					"focusable": true,
+					"method": "ObjectMethods/split.4dm"
+				},
+				"tokenize": {
+					"type": "button",
+					"text": "tokenize",
+					"top": 140,
+					"left": 120,
+					"width": 90,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"action": "",
+					"focusable": true,
+					"method": "ObjectMethods/tokenize.4dm"
+				},
+				"split1": {
+					"type": "button",
+					"text": "split",
+					"top": 140,
+					"left": 520,
+					"width": 90,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"action": "",
+					"focusable": true,
+					"method": "ObjectMethods/split1.4dm"
+				},
+				"tokenize1": {
+					"type": "button",
+					"text": "tokenize",
+					"top": 140,
+					"left": 620,
+					"width": 90,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"action": "",
+					"focusable": true,
+					"method": "ObjectMethods/tokenize1.4dm"
+				},
+				"a": {
+					"type": "button",
+					"text": "a",
+					"top": 140,
+					"left": 259,
+					"width": 90,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"action": "",
+					"focusable": true,
+					"method": "ObjectMethods/a.4dm"
+				},
+				"b": {
+					"type": "button",
+					"text": "b",
+					"top": 140,
+					"left": 358,
+					"width": 90,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"action": "",
+					"focusable": true,
+					"method": "ObjectMethods/b.4dm"
+				}
+			}
+		}
+	],
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"geometryStamp": 190
+}

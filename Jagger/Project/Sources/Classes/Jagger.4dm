@@ -3,6 +3,7 @@ Class extends _CLI
 property model : 4D:C1709.Folder
 property data : Collection
 property segmentationOnly : Boolean
+property reloadModel : Boolean
 
 Class constructor($controller : 4D:C1709.Class)
 	
@@ -103,7 +104,7 @@ Function split($text : Text; $async : Boolean) : Collection
 	
 	return This:C1470._getCollection($text; True:C214; $async)
 	
-Function train($model : 4D:C1709.Folder; $dict : 4D:C1709.File; $user : 4D:C1709.File; $JAG : 4D:C1709.File)
+Function train($model : 4D:C1709.Folder; $dict : 4D:C1709.File; $user : 4D:C1709.File; $JAG : 4D:C1709.File; $async : Boolean)
 	
 	If ($model=Null:C1517) || (Not:C34(OB Instance of:C1731($model; 4D:C1709.Folder)))
 		return 
@@ -152,11 +153,19 @@ Function train($model : 4D:C1709.Folder; $dict : 4D:C1709.File; $user : 4D:C1709
 		$command+=This:C1470.escape(This:C1470.expand($JAG).platformPath)
 	End if 
 	
+	//%W-550.26
+	This:C1470._newModel:=$model
+	//%W+550.26
+	
+	This:C1470.reloadModel:=True:C214
 	This:C1470.controller.execute($command)
 	This:C1470.worker.closeInput()
-	This:C1470.worker.wait()
 	
-	This:C1470.model:=$model
+	If ($async)
+		return 
+	Else 
+		This:C1470.worker.wait()
+	End if 
 	
 Function _getCollection($text : Text; $segmentationOnly : Boolean; $async : Boolean) : Collection
 	
@@ -177,6 +186,7 @@ Function _getCollection($text : Text; $segmentationOnly : Boolean; $async : Bool
 		$command+=" -w "
 	End if 
 	
+	This:C1470.reloadModel:=False:C215
 	This:C1470.segmentationOnly:=$segmentationOnly
 	This:C1470.controller.execute($command)
 	This:C1470.worker.postMessage($text)

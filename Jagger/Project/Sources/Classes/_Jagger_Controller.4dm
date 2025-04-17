@@ -20,6 +20,12 @@ Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 	If ($worker.dataType="text")
 		Case of 
+			: (This:C1470.instance.reloadModel)
+				
+				//%W-550.26
+				This:C1470.instance.model:=This:C1470.instance._newModel
+				//%W+550.26
+				
 			: (This:C1470.instance.segmentationOnly)
 				$values:=Split string:C1554($worker.response; " "; sk trim spaces:K86:2 | sk ignore empty strings:K86:1)
 			Else 
