@@ -1,10 +1,8 @@
+Class extends _CLI
+
 property model : 4D:C1709.Folder
 property data : Collection
 property segmentationOnly : Boolean
-
-Class extends _CLI
-
-property text : Object
 
 Class constructor($controller : 4D:C1709.Class)
 	
@@ -97,13 +95,13 @@ Function get controller() : cs:C1710._Jagger_Controller
 	return This:C1470._controller
 	//%W+550.26
 	
-Function tokenize($text) : Collection
+Function tokenize($text : Text; $async : Boolean) : Collection
 	
-	return This:C1470._run($text; False:C215)
+	return This:C1470._getCollection($text; False:C215; $async)
 	
-Function split($text) : Collection
+Function split($text : Text; $async : Boolean) : Collection
 	
-	return This:C1470._run($text; True:C214)
+	return This:C1470._getCollection($text; True:C214; $async)
 	
 Function train($model : 4D:C1709.Folder; $dict : 4D:C1709.File; $user : 4D:C1709.File; $JAG : 4D:C1709.File)
 	
@@ -160,27 +158,33 @@ Function train($model : 4D:C1709.Folder; $dict : 4D:C1709.File; $user : 4D:C1709
 	
 	This:C1470.model:=$model
 	
-Function _run($text : Text; $segmentationOnly : Boolean) : Collection
+Function _getCollection($text : Text; $segmentationOnly : Boolean; $async : Boolean) : Collection
 	
-	If ($text#"")
-		$command:=This:C1470.escape(This:C1470.executablePath)
-		$command+=" -m "
-		If (Is macOS:C1572)
-			$command+=This:C1470.escape(This:C1470.model.path)
-		Else 
-			$command+=This:C1470.escape(This:C1470.model.platformPath)
-		End if 
-		
-		If ($segmentationOnly)
-			$command+=" -w"
-		End if 
-		
-		This:C1470.segmentationOnly:=$segmentationOnly
-		This:C1470.controller.execute($command)
-		This:C1470.worker.postMessage($text)
-		This:C1470.worker.closeInput()
+	If ($text="")
+		return []
+	End if 
+	
+	$command:=This:C1470.escape(This:C1470.executablePath)
+	
+	$command+=" -m "
+	If (Is macOS:C1572)
+		$command+=This:C1470.escape(This:C1470.model.path)
+	Else 
+		$command+=This:C1470.escape(This:C1470.model.platformPath)
+	End if 
+	
+	If ($segmentationOnly)
+		$command+=" -w "
+	End if 
+	
+	This:C1470.segmentationOnly:=$segmentationOnly
+	This:C1470.controller.execute($command)
+	This:C1470.worker.postMessage($text)
+	This:C1470.worker.closeInput()
+	
+	If ($async)
+		return 
+	Else 
 		This:C1470.worker.wait()
-		
 		return This:C1470.data
-		
 	End if 
