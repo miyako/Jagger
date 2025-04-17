@@ -41,7 +41,7 @@ Function get controller() : cs:C1710._Jagger_Controller
 	return This:C1470._controller
 	//%W+550.26
 	
-Function analyze($text) : Collection
+Function tokenize($text) : Collection
 	
 	return This:C1470._run($text; False:C215)
 	
