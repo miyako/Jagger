@@ -19,6 +19,62 @@ Class constructor($controller : 4D:C1709.Class)
 	
 	This:C1470.JAGGER_DEFAULT_MODEL:=This:C1470.expand($model.folder)
 	This:C1470._model:=This:C1470.JAGGER_DEFAULT_MODEL
+	
+	Case of 
+		: (Is macOS:C1572)
+			This:C1470._executableNameForTraining:="train_jagger"
+		: (Is Windows:C1573)
+			This:C1470._executableNameForTraining:="train_jagger.exe"
+	End case 
+	
+	This:C1470._executableFileForTraining:=File:C1566(This:C1470.currentDirectory.file(This:C1470._executableNameForTraining).path)
+	
+	If (This:C1470.executableFileForTraining.exists)
+		Case of 
+			: (Is macOS:C1572)
+				This:C1470._executablePathForTraining:=This:C1470.currentDirectory.file(This:C1470.executableNameForTraining).path
+			: (Is Windows:C1573)
+				This:C1470._executablePathForTraining:=This:C1470.currentDirectory.file(This:C1470.executableNameForTraining).platformPath
+		End case 
+	End if 
+	
+	//%W+550.26
+	
+Function get executableNameForTraining() : Text
+	
+	//%W-550.26
+	return This:C1470._executableNameForTraining
+	//%W+550.26
+	
+Function get executableFileForTraining() : 4D:C1709.File
+	
+	//%W-550.26
+	return This:C1470._executableFileForTraining
+	//%W+550.26
+	
+Function get executablePathForTraining() : Text
+	
+	//%W-550.26
+	return This:C1470._executablePathForTraining
+	//%W+550.26
+	
+Function set model($model : 4D:C1709.Folder)
+	
+	If ($model=Null:C1517) || (Not:C34(OB Instance of:C1731($model; 4D:C1709.Folder)))
+		return 
+	End if 
+	
+	var $file : Text
+	For each ($file; ["patterns"; "patterns.c2i"; "patterns.da"; "patterns.fs"; "patterns.p2f"])
+		If ($model.file($file).exists)
+			continue
+		Else 
+			return 
+		End if 
+	End for each 
+	
+	//%W-550.26
+	This:C1470._model:=This:C1470.expand($model)
 	//%W+550.26
 	
 Function get model() : 4D:C1709.Folder
@@ -48,6 +104,61 @@ Function tokenize($text) : Collection
 Function split($text) : Collection
 	
 	return This:C1470._run($text; True:C214)
+	
+Function train($model : 4D:C1709.Folder; $dict : 4D:C1709.File; $user : 4D:C1709.File; $JAG : 4D:C1709.File)
+	
+	If ($model=Null:C1517) || (Not:C34(OB Instance of:C1731($model; 4D:C1709.Folder)))
+		return 
+	End if 
+	
+	$model.create()
+	
+	If ($dict=Null:C1517) || (Not:C34(OB Instance of:C1731($dict; 4D:C1709.File))) || (Not:C34($dict.exists))
+		return 
+	End if 
+	
+	If ($user=Null:C1517) || (Not:C34(OB Instance of:C1731($user; 4D:C1709.File))) || (Not:C34($user.exists))
+		return 
+	End if 
+	
+	If ($JAG=Null:C1517) || (Not:C34(OB Instance of:C1731($JAG; 4D:C1709.File))) || (Not:C34($JAG.exists))
+		return 
+	End if 
+	
+	$command:=This:C1470.escape(This:C1470.executablePathForTraining)
+	$command+=" -m "
+	If (Is macOS:C1572)
+		$command+=This:C1470.escape(This:C1470.expand($model).path)
+	Else 
+		$command+=This:C1470.escape(This:C1470.expand($model).platformPath)
+	End if 
+	
+	$command+=" -d "
+	If (Is macOS:C1572)
+		$command+=This:C1470.escape(This:C1470.expand($dict).path)
+	Else 
+		$command+=This:C1470.escape(This:C1470.expand($dict).platformPath)
+	End if 
+	
+	$command+=" -u "
+	If (Is macOS:C1572)
+		$command+=This:C1470.escape(This:C1470.expand($user).path)
+	Else 
+		$command+=This:C1470.escape(This:C1470.expand($user).platformPath)
+	End if 
+	
+	$command+=" "
+	If (Is macOS:C1572)
+		$command+=This:C1470.escape(This:C1470.expand($JAG).path)
+	Else 
+		$command+=This:C1470.escape(This:C1470.expand($JAG).platformPath)
+	End if 
+	
+	This:C1470.controller.execute($command)
+	This:C1470.worker.closeInput()
+	This:C1470.worker.wait()
+	
+	This:C1470.model:=$model
 	
 Function _run($text : Text; $segmentationOnly : Boolean) : Collection
 	

@@ -18,7 +18,7 @@ Class constructor($executableName : Text; $controller : 4D:C1709.Class)
 	
 	This:C1470._executableFile:=File:C1566(This:C1470.currentDirectory.file(This:C1470.executableName).path)
 	
-	If (This:C1470._executableFile.exists)
+	If (This:C1470.executableFile.exists)
 		
 		//the executable is in /RESOURCES/bin/{platform}
 		
