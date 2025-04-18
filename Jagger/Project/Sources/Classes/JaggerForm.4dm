@@ -19,7 +19,7 @@ Function onLoad()
 	
 	Form:C1466.Jagger4D:=cs:C1710.Jagger.new(cs:C1710._JaggerUI_Controller)
 	
-	$model:=Folder:C1567(fk desktop folder:K87:19).folder("custom-model")
+	$model:=cs:C1710.Model.new("commands4D")
 	
 	If ($model.exists)
 		
@@ -33,11 +33,10 @@ Function onLoad()
 			$dict.install()
 		End if 
 		
-		$model:=Folder:C1567(fk desktop folder:K87:19).folder("custom-model")
 		$user:=File:C1566("/RESOURCES/user")  //csv,utf8,no empty lines
 		$JAG:=File:C1566("/RESOURCES/train.JAG")  //csv,utf8,no empty lines
 		
-		Form:C1466.Jagger4D.train($model; $dict.file; $user; $JAG; True:C214)  //new model is automatically selected
+		Form:C1466.Jagger4D.train($model.folder; $dict.file; $user; $JAG; True:C214)  //new model is automatically selected
 		
 	End if 
 	

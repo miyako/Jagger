@@ -261,7 +261,7 @@
 				},
 				"a": {
 					"type": "button",
-					"text": "a",
+					"text": "example a",
 					"top": 140,
 					"left": 259,
 					"width": 90,
@@ -272,12 +272,12 @@
 					"sizingX": "fixed",
 					"sizingY": "fixed",
 					"action": "",
-					"focusable": true,
+					"focusable": false,
 					"method": "ObjectMethods/a.4dm"
 				},
 				"b": {
 					"type": "button",
-					"text": "b",
+					"text": "example b",
 					"top": 140,
 					"left": 358,
 					"width": 90,
@@ -288,7 +288,7 @@
 					"sizingX": "fixed",
 					"sizingY": "fixed",
 					"action": "",
-					"focusable": true,
+					"focusable": false,
 					"method": "ObjectMethods/b.4dm"
 				}
 			}
