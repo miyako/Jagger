@@ -3,7 +3,11 @@
 
 実行ファイル`jagger`は`stdIn` `stdOut`ではなく，コマンドラインと対話するバージョンです。
 
+<img src="https://github.com/user-attachments/assets/2426962a-b4ce-48a2-a029-78d4ea909db3" width=500 height=auto />
+
 デフォルトのモデルファイルは`../model/kyoto+kwdlc/pattern`です。
+
+
 
  ## 辞書の管理
 
