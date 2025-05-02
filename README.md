@@ -1,7 +1,9 @@
 # Jagger
 形態素解析器
 
-実行ファイル`jagger`は`stdIn` `stdOut`ではなく，コマンドラインと対話するように変更されたバージョンです。
+実行ファイル`jagger`は`stdIn` `stdOut`ではなく，コマンドラインと対話するバージョンです。
+
+デフォルトのモデルファイルは`../model/kyoto+kwdlc/pattern`です。
 
  ## 辞書の管理
 
