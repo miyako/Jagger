@@ -50,6 +50,31 @@ ALERT(JSON Stringify($status; *))
 
 <img src="https://github.com/user-attachments/assets/f9c73247-5a62-4fb1-ae26-94a4d9091736" width=400 height=auto />
 
+## つかいかた（非同期モード）
+
+```4d
+#DECLARE($params : Object)
+
+If (Count parameters=0)
+	
+	CALL WORKER("J"; Current method name; {})
+	
+Else 
+	
+	var Jagger : cs.Jagger
+	If (J=Null)
+		J:=cs.Jagger.new()
+	End if 
+	
+	$text:="Jagger は、辞書に基づく単語分割のための最長一致法と、機械学習の分類器の事前計算に着想を得た、特徴パターンに基づく高速・高精度・省メモリの形態素解析器です。"
+	$status:=Jagger.split($text; True)
+	
+	//Jagger.quit()
+	
+End if
+```
+
+実行ファイルを起動したまま，CGIのように標準入出力で対話します。毎回，辞書やモデルをロードしないので効率的です。`.quit()`するまで`onData`コールバック関数が呼ばれます。実行中のインスタンスで辞書やモデルを変更することはできません。起動した後は`split`あるいは`tokenize`いずれかの実装になります。
 ## 注記
 
 * コンストラクターが必要に応じてGitHubからデフォルトの辞書をインストールします。
