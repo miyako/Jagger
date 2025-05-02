@@ -1,4 +1,20 @@
 {
+	"Classes": {
+		"classes": [
+			"_CLI",
+			"_CLI_Controller",
+			"_Form",
+			"_HTTP",
+			"_Jagger_Controller",
+			"_JaggerUI_Controller",
+			"_URI",
+			"_Zip",
+			"Dict",
+			"Jagger",
+			"JaggerForm",
+			"Model"
+		]
+	},
 	"sync": {
 		"methods": [
 			"TEST_split",

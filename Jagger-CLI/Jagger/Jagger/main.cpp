@@ -628,12 +628,12 @@ static void getParentDir(std::string &parentdir) {
     std::vector<char> buffer(size);
     _NSGetExecutablePath(buffer.data(), &size);
     std::string executablepath = std::string(buffer.data());
-    parentdir = std::filesystem::path(executablepath).parent_path().string();
+    parentdir = std::filesystem::path(executablepath).parent_path().parent_path().string();
 #else
     wchar_t buffer[_MAX_PATH] = { 0 };
     GetModuleFileNameW(nullptr, buffer, _MAX_PATH);
     std::wstring executablepath = std::wstring(buffer.data());
-    wide_to_utf8(std::filesystem::path(executablepath).parent_path().string().c_str(), parentdir);
+    wide_to_utf8(std::filesystem::path(executablepath).parent_path().parent_path().string().c_str(), parentdir);
 #endif
     parentdir += SEP;
 }
