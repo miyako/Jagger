@@ -21,6 +21,8 @@
 
 #ifdef _WIN32
 #include <Shlobj.h>
+#include <io.h>
+#include <Shlwapi.h>//PathFindExtension
 #define SEP "\\"
 #define SEPCHAR '\\'
 #endif
@@ -61,47 +63,6 @@ FILE* _fopen(const char* filename, const char* mode)
         }
     }
     return  fopen(filename, mode);
-}
-void* _mmap(void* addr, size_t length, int prot, int flags, int fd, off_t offset)
-{
-    HANDLE hFile = INVALID_HANDLE_VALUE;
-    if (fd != -1) {
-        hFile = (HANDLE)_get_osfhandle(fd);  // Convert file descriptor to HANDLE
-        if (hFile == INVALID_HANDLE_VALUE) return NULL;  // Invalid file handle
-    }
-
-    // Open or create file mapping
-    HANDLE hMap = CreateFileMapping(hFile,
-        NULL,
-        PAGE_READWRITE,
-        0,
-        0,
-        NULL);
-
-    if (hMap == NULL) {
-        DWORD lastError = GetLastError();
-        return NULL;
-    }
-
-    // Create a view of the file (map memory)
-    void* mappedAddr = MapViewOfFile(hMap,
-        FILE_MAP_WRITE,
-        0,
-        0,
-        length);
-
-    if (mappedAddr == NULL) {
-        DWORD lastError = GetLastError();
-        CloseHandle(hMap);
-        return NULL;
-    }
-
-    // Return mapped memory address
-    return mappedAddr;
-}
-void _munmap(void* addr, size_t length)
-{
-    UnmapViewOfFile(addr);
 }
 void utf8_to_wide(const char* utf8_str, std::wstring& utf16_str)
 {
@@ -147,6 +108,73 @@ void wide_to_utf8(const wchar_t* utf16_str, std::string& utf8_str)
 
     return;
 }
+
+void* _mmap(void* addr, size_t length, int prot, int flags, int fd, off_t offset, const std::string& fn)
+{
+    HANDLE hFile = INVALID_HANDLE_VALUE;
+    if (fd != -1) {
+        hFile = (HANDLE)_get_osfhandle(fd);  // Convert file descriptor to HANDLE
+        if (hFile == INVALID_HANDLE_VALUE) return NULL;  // Invalid file handle
+    }
+
+    std::wstring name;
+    utf8_to_wide(fn.c_str(), name);
+    const wchar_t* fileName = PathFindFileName(name.c_str());
+
+    // try to open file mapping
+    HANDLE hMap = OpenFileMapping(
+        FILE_MAP_READ/*FILE_MAP_ALL_ACCESS*/,
+        FALSE,
+        name.c_str());
+
+    if (hMap == NULL) {
+        //create file mapping
+        BY_HANDLE_FILE_INFORMATION fileInfo;
+        if (GetFileInformationByHandle(hFile, &fileInfo)) {
+            DWORD dwSizeHigh = fileInfo.nFileSizeHigh;
+            DWORD dwSizeLow = fileInfo.nFileSizeLow;
+            hMap = CreateFileMapping(hFile,
+                NULL,
+                PAGE_READONLY/*PAGE_READWRITE*/,
+                dwSizeHigh,
+                dwSizeLow,
+                fileName);
+        }
+        if (hMap == NULL) {
+            hMap = CreateFileMapping(hFile,
+                NULL,
+                PAGE_READONLY/*PAGE_READWRITE*/,
+                0,
+                0,
+                NULL);
+        }
+    }
+
+    if (hMap == NULL) {
+        DWORD lastError = GetLastError();
+        return NULL;
+    }
+
+    // Create a view of the file (map memory)
+    void* mappedAddr = MapViewOfFile(hMap,
+        FILE_MAP_READ/*FILE_MAP_WRITE*/,
+        0,
+        0,
+        length);
+
+    if (mappedAddr == NULL) {
+        DWORD lastError = GetLastError();
+        CloseHandle(hMap);
+        return NULL;
+    }
+
+    // Return mapped memory address
+    return mappedAddr;
+}
+void _munmap(void* addr, size_t length)
+{
+    UnmapViewOfFile(addr);
+}
 int __open(const char* utf8_path, int oflag, ...)
 {
     std::wstring wide_path;
@@ -160,7 +188,7 @@ int __open(const char* utf8_path, int oflag, ...)
     HANDLE hFile = CreateFileW(
         wide_path.c_str(),
         GENERIC_READ | GENERIC_WRITE,
-        FILE_SHARE_READ,
+        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
         NULL,
         OPEN_EXISTING,
         FILE_ATTRIBUTE_NORMAL,
@@ -235,7 +263,7 @@ namespace jagger {
         }
       const size_t size = __lseek(fd, 0, SEEK_END); // get size
       __lseek(fd, 0, SEEK_SET);
-      void *data = _mmap (0, size, PROT_READ, MAP_SHARED, fd, 0);
+      void *data = _mmap (0, size, PROT_READ, MAP_SHARED, fd, 0, fn);
       _close (fd);
       _mmaped.push_back (std::make_pair (data, size));
       return data;
@@ -632,8 +660,8 @@ static void getParentDir(std::string &parentdir) {
 #else
     wchar_t buffer[_MAX_PATH] = { 0 };
     GetModuleFileNameW(nullptr, buffer, _MAX_PATH);
-    std::wstring executablepath = std::wstring(buffer.data());
-    wide_to_utf8(std::filesystem::path(executablepath).parent_path().parent_path().string().c_str(), parentdir);
+    std::wstring executablepath(buffer);
+    wide_to_utf8(std::filesystem::path(executablepath).parent_path().parent_path().wstring().c_str(), parentdir);
 #endif
     parentdir += SEP;
 }

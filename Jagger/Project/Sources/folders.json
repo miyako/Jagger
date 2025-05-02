@@ -1,4 +1,9 @@
 {
+	"async": {
+		"methods": [
+			"TEST_async"
+		]
+	},
 	"Classes": {
 		"classes": [
 			"_CLI",
@@ -19,6 +24,12 @@
 		"methods": [
 			"TEST_split",
 			"TEST_tokenize"
+		]
+	},
+	"train": {
+		"methods": [
+			"TEST_custom",
+			"TEST_train"
 		]
 	},
 	"trash": {}

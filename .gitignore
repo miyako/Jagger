@@ -2,4 +2,6 @@ jagger.dmg
 train_jagger.dmg
 Jagger/Project/DerivedData/*
 Jagger/userPreferences.*
-
+Jagger-CLI/Jagger/.vs/*
+Jagger/Resources/bin/dict/jumandic-7.0-20130310/dict
+Jagger-CLI/Jagger/x64*

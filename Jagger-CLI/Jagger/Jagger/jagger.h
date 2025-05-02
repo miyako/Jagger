@@ -5,9 +5,6 @@
 #define JAGGER_H
 #include <sys/stat.h>
 #ifdef _WIN32
-#include <Windows.h>
-#include <shlwapi.h>
-#include <io.h>
 #define read  _read
 #define write _write
 #define FORCE_INLINE __forceinline
