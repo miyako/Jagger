@@ -81,6 +81,9 @@ Else
 	
 End if
 ```
+<img src="https://github.com/user-attachments/assets/189b39b6-21c9-413a-8462-8b51c559b9b6" width=800 height=auto />
+
+
 
 実行ファイルを起動したまま，CGIのように標準入出力で対話します。毎回，辞書やモデルをロードしないので効率的です。`.quit()`するまで`onData`コールバック関数が呼ばれます。実行中のインスタンスで辞書やモデルを変更することはできません。起動した後は`split`あるいは`tokenize`いずれかの実装になります。
 ## 注記
