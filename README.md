@@ -65,7 +65,7 @@ ALERT(JSON Stringify($status; *))
 
 If (Count parameters=0)
 	
-	CALL WORKER("J"; Current method name; {})
+	CALL WORKER("Jagger"; Current method name; {})
 	
 Else 
 	
