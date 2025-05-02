@@ -117,16 +117,17 @@ void* _mmap(void* addr, size_t length, int prot, int flags, int fd, off_t offset
         if (hFile == INVALID_HANDLE_VALUE) return NULL;  // Invalid file handle
     }
 
+#define OPEN_FILE_MAPPING 0
+
+#if OPEN_FILE_MAPPING
     std::wstring name;
     utf8_to_wide(fn.c_str(), name);
     const wchar_t* fileName = PathFindFileName(name.c_str());
-
     // try to open file mapping
     HANDLE hMap = OpenFileMapping(
         FILE_MAP_READ/*FILE_MAP_ALL_ACCESS*/,
         FALSE,
         name.c_str());
-
     if (hMap == NULL) {
         //create file mapping
         BY_HANDLE_FILE_INFORMATION fileInfo;
@@ -140,15 +141,15 @@ void* _mmap(void* addr, size_t length, int prot, int flags, int fd, off_t offset
                 dwSizeLow,
                 fileName);
         }
-        if (hMap == NULL) {
-            hMap = CreateFileMapping(hFile,
-                NULL,
-                PAGE_READONLY/*PAGE_READWRITE*/,
-                0,
-                0,
-                NULL);
-        }
     }
+#else
+    HANDLE hMap = CreateFileMapping(hFile,
+        NULL,
+        PAGE_READONLY/*PAGE_READWRITE*/,
+        0,
+        0,
+        NULL);
+#endif
 
     if (hMap == NULL) {
         DWORD lastError = GetLastError();

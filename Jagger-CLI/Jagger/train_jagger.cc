@@ -681,6 +681,7 @@ namespace jagger {
             writer = _fopen((m + ".fs").c_str(), "wb");
             IF_COMPACT(const size_t base_offset = _tbag.serialize(writer, offsets_));
             fbag.serialize(writer, offsets); // (core +) lemma
+            fflush(writer);
             std::fclose(writer);
             // save mapping from feature ID to feature strings
             feat_info_t finfo = { 0 };
