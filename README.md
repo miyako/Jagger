@@ -27,7 +27,7 @@ If (Not($model.exists))
 End if
 ```
 
-## つかいかた
+## つかいかた（同期モード）
 
 ```4d
 var $Jagger : cs.Jagger.Jagger
