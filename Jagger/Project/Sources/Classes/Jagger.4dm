@@ -96,13 +96,21 @@ Function get controller() : cs:C1710._Jagger_Controller
 	return This:C1470._controller
 	//%W+550.26
 	
-Function tokenize($text : Text; $async : Boolean) : Collection
+Function tokenize($text : Text; $async : Boolean) : Object
 	
-	return This:C1470._getCollection($text; False:C215; $async)
+	If ($async)
+		return This:C1470._run($text; False:C215)
+	Else 
+		return This:C1470._get($text; False:C215)
+	End if 
 	
-Function split($text : Text; $async : Boolean) : Collection
+Function split($text : Text; $async : Boolean) : Object
 	
-	return This:C1470._getCollection($text; True:C214; $async)
+	If ($async)
+		return This:C1470._run($text; True:C214)
+	Else 
+		return This:C1470._get($text; True:C214)
+	End if 
 	
 Function train($model : 4D:C1709.Folder; $dict : 4D:C1709.File; $user : 4D:C1709.File; $JAG : 4D:C1709.File; $async : Boolean)
 	
@@ -167,34 +175,49 @@ Function train($model : 4D:C1709.Folder; $dict : 4D:C1709.File; $user : 4D:C1709
 		This:C1470.worker.wait()
 	End if 
 	
-Function _getCollection($text : Text; $segmentationOnly : Boolean; $async : Boolean) : Collection
+Function quit() : cs:C1710.Jagger
+	
+	If (This:C1470.worker#Null:C1517) && (Not:C34(This:C1470.worker.terminated))
+		This:C1470.worker.closeInput()
+	End if 
+	
+	return This:C1470
+	
+Function _run($text : Text; $segmentationOnly : Boolean) : cs:C1710.Jagger
+	
+	If (This:C1470.worker=Null:C1517) || (This:C1470.worker.terminated)
+		$command:=This:C1470.escape(This:C1470.executablePath)
+		
+		$command+=" -m "
+		If (Is macOS:C1572)
+			$command+=This:C1470.escape(This:C1470.model.path)
+		Else 
+			$command+=This:C1470.escape(This:C1470.model.platformPath)
+		End if 
+		
+		If ($segmentationOnly)
+			$command+=" -w "
+		End if 
+		
+		This:C1470.reloadModel:=False:C215
+		This:C1470.segmentationOnly:=$segmentationOnly
+		This:C1470.controller.execute($command)
+	End if 
+	
+	If ($text#"")
+		This:C1470.worker.postMessage($text+"\n")
+	End if 
+	
+	return This:C1470
+	
+Function _get($text : Text; $segmentationOnly : Boolean) : Object
 	
 	If ($text="")
-		return []
+		return {data: []}
 	End if 
 	
-	$command:=This:C1470.escape(This:C1470.executablePath)
+	This:C1470._run($text; $segmentationOnly)
 	
-	$command+=" -m "
-	If (Is macOS:C1572)
-		$command+=This:C1470.escape(This:C1470.model.path)
-	Else 
-		$command+=This:C1470.escape(This:C1470.model.platformPath)
-	End if 
+	This:C1470.quit().worker.wait()
 	
-	If ($segmentationOnly)
-		$command+=" -w "
-	End if 
-	
-	This:C1470.reloadModel:=False:C215
-	This:C1470.segmentationOnly:=$segmentationOnly
-	This:C1470.controller.execute($command)
-	This:C1470.worker.postMessage($text)
-	This:C1470.worker.closeInput()
-	
-	If ($async)
-		return 
-	Else 
-		This:C1470.worker.wait()
-		return This:C1470.data
-	End if 
+	return {data: This:C1470.data}

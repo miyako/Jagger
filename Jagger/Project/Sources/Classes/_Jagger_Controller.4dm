@@ -12,10 +12,6 @@ Function get instance() : cs:C1710.Jagger
 	
 Function onData($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-Function onDataError($worker : 4D:C1709.SystemWorker; $params : Object)
-	
-Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
-	
 	$values:=[]
 	
 	If ($worker.dataType="text")
@@ -27,15 +23,17 @@ Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 				//%W+550.26
 				
 			: (This:C1470.instance.segmentationOnly)
-				$values:=Split string:C1554($worker.response; " "; sk trim spaces:K86:2 | sk ignore empty strings:K86:1)
+				$values:=Split string:C1554($params.data; "\n"; sk trim spaces:K86:2 | sk ignore empty strings:K86:1)
 			Else 
 				var $lines : Collection
-				$lines:=Split string:C1554($worker.response; This:C1470.instance.EOL)
+				$lines:=Split string:C1554($params.data; "\n"; sk trim spaces:K86:2 | sk ignore empty strings:K86:1)
 				
 				For each ($line; $lines)
 					$v:=Split string:C1554($line; "\t")
 					If ($v.length=2)
-						$values.push({pos: $v[0]; dic: Split string:C1554($v[1]; ",")})
+						If (Length:C16($v[0])#0)
+							$values.push({pos: $v[0]; dic: Split string:C1554($v[1]; ",")})
+						End if 
 					Else 
 						break
 					End if 
@@ -44,6 +42,10 @@ Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	End if 
 	
 	This:C1470.instance.data:=$values
+	
+Function onDataError($worker : 4D:C1709.SystemWorker; $params : Object)
+	
+Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 Function onError($worker : 4D:C1709.SystemWorker; $params : Object)
 	

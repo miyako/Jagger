@@ -195,12 +195,12 @@
 					"sizingX": "grow",
 					"right": 710
 				},
-				"split": {
+				"tokenize with standard model": {
 					"type": "button",
-					"text": "split",
+					"text": "tokenize with standard model",
 					"top": 140,
 					"left": 20,
-					"width": 90,
+					"width": 190,
 					"height": 21,
 					"events": [
 						"onClick"
@@ -208,15 +208,15 @@
 					"sizingX": "fixed",
 					"sizingY": "fixed",
 					"action": "",
-					"focusable": true,
-					"method": "ObjectMethods/split.4dm"
+					"focusable": false,
+					"method": "ObjectMethods/tokenize with standard model.4dm"
 				},
-				"tokenize": {
+				"tokenize with custom model": {
 					"type": "button",
-					"text": "tokenize",
+					"text": "tokenize with custom model",
 					"top": 140,
-					"left": 120,
-					"width": 90,
+					"left": 220,
+					"width": 210,
 					"height": 21,
 					"events": [
 						"onClick"
@@ -225,45 +225,13 @@
 					"sizingY": "fixed",
 					"action": "",
 					"focusable": true,
-					"method": "ObjectMethods/tokenize.4dm"
-				},
-				"split1": {
-					"type": "button",
-					"text": "split",
-					"top": 140,
-					"left": 520,
-					"width": 90,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"sizingX": "fixed",
-					"sizingY": "fixed",
-					"action": "",
-					"focusable": true,
-					"method": "ObjectMethods/split1.4dm"
-				},
-				"tokenize1": {
-					"type": "button",
-					"text": "tokenize",
-					"top": 140,
-					"left": 620,
-					"width": 90,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"sizingX": "fixed",
-					"sizingY": "fixed",
-					"action": "",
-					"focusable": true,
-					"method": "ObjectMethods/tokenize1.4dm"
+					"method": "ObjectMethods/tokenize with custom model.4dm"
 				},
 				"a": {
 					"type": "button",
 					"text": "example a",
 					"top": 140,
-					"left": 259,
+					"left": 519,
 					"width": 90,
 					"height": 21,
 					"events": [
@@ -279,7 +247,7 @@
 					"type": "button",
 					"text": "example b",
 					"top": 140,
-					"left": 358,
+					"left": 618,
 					"width": 90,
 					"height": 21,
 					"events": [
@@ -302,5 +270,5 @@
 			"View 1": {}
 		}
 	},
-	"geometryStamp": 190
+	"geometryStamp": 245
 }

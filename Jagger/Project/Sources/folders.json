@@ -1,3 +1,9 @@
 {
+	"sync": {
+		"methods": [
+			"TEST_split",
+			"TEST_tokenize"
+		]
+	},
 	"trash": {}
 }

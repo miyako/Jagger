@@ -23,7 +23,7 @@ Function onLoad()
 	
 	If ($model.exists)
 		
-		Form:C1466.Jagger4D.model:=$model
+		Form:C1466.Jagger4D.model:=$model.folder
 		
 	Else 
 		
@@ -40,13 +40,10 @@ Function onLoad()
 		
 	End if 
 	
-Function split($custom : Boolean)
+Function onUnload()
 	
-	If ($custom)
-		Form:C1466.Jagger4D.split(This:C1470.text; True:C214)
-	Else 
-		Form:C1466.Jagger.split(This:C1470.text; True:C214)
-	End if 
+	Form:C1466.Jagger.quit()
+	Form:C1466.Jagger4D.quit()
 	
 Function tokenize($custom : Boolean)
 	

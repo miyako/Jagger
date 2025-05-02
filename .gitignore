@@ -1,6 +1,4 @@
-amd/*
-arm/*
 jagger.dmg
 train_jagger.dmg
-Jagger/Resources/model/*
-Jagger/Resources/custom-model/*
+Jagger/Project/DerivedData/*
+Jagger/userPreferences.*
