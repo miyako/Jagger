@@ -21,7 +21,7 @@ on:
           required: true
 
 env: 
-  project_path: xmlsec/Project/xmlsec.4DProject
+  project_path: Jagger/Project/Jagger.4DProject
   
 jobs:
 
