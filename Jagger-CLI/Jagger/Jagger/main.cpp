@@ -109,7 +109,7 @@ void wide_to_utf8(const wchar_t* utf16_str, std::string& utf8_str)
     return;
 }
 
-void* _mmap(void* addr, size_t length, int prot, int flags, int fd, off_t offset, const std::string& fn)
+void* _mmap(void* addr, size_t length, int prot, int flags, int fd, off_t offset)
 {
     HANDLE hFile = INVALID_HANDLE_VALUE;
     if (fd != -1) {
@@ -117,39 +117,12 @@ void* _mmap(void* addr, size_t length, int prot, int flags, int fd, off_t offset
         if (hFile == INVALID_HANDLE_VALUE) return NULL;  // Invalid file handle
     }
 
-#define OPEN_FILE_MAPPING 0
-
-#if OPEN_FILE_MAPPING
-    std::wstring name;
-    utf8_to_wide(fn.c_str(), name);
-    const wchar_t* fileName = PathFindFileName(name.c_str());
-    // try to open file mapping
-    HANDLE hMap = OpenFileMapping(
-        FILE_MAP_READ/*FILE_MAP_ALL_ACCESS*/,
-        FALSE,
-        name.c_str());
-    if (hMap == NULL) {
-        //create file mapping
-        BY_HANDLE_FILE_INFORMATION fileInfo;
-        if (GetFileInformationByHandle(hFile, &fileInfo)) {
-            DWORD dwSizeHigh = fileInfo.nFileSizeHigh;
-            DWORD dwSizeLow = fileInfo.nFileSizeLow;
-            hMap = CreateFileMapping(hFile,
-                NULL,
-                PAGE_READONLY/*PAGE_READWRITE*/,
-                dwSizeHigh,
-                dwSizeLow,
-                fileName);
-        }
-    }
-#else
     HANDLE hMap = CreateFileMapping(hFile,
         NULL,
         PAGE_READONLY/*PAGE_READWRITE*/,
         0,
         0,
         NULL);
-#endif
 
     if (hMap == NULL) {
         DWORD lastError = GetLastError();
@@ -264,7 +237,7 @@ namespace jagger {
         }
       const size_t size = __lseek(fd, 0, SEEK_END); // get size
       __lseek(fd, 0, SEEK_SET);
-      void *data = _mmap (0, size, PROT_READ, MAP_SHARED, fd, 0, fn);
+      void *data = _mmap (0, size, PROT_READ, MAP_SHARED, fd, 0);
       _close (fd);
       _mmaped.push_back (std::make_pair (data, size));
       return data;

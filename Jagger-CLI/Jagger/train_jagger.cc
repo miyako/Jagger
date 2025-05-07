@@ -25,6 +25,7 @@
 #endif
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
+#import <Cocoa/Cocoa.h>
 #define SEP "/"
 #define SEPCHAR '/'
 #endif
@@ -260,7 +261,7 @@ namespace jagger {
             }
             const size_t size = __lseek(fd, 0, SEEK_END); // get size
             __lseek(fd, 0, SEEK_SET);
-            void* data = _mmap(0, size, PROT_READ, MAP_SHARED, fd, 0, fn);
+            void* data = _mmap(0, size, PROT_READ, MAP_SHARED, fd, 0);
             _close(fd);
             _mmaped.push_back(std::make_pair(data, size));
             return data;

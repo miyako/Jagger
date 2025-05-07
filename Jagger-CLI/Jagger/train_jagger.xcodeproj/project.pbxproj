@@ -6,8 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D18E2A1D2DCB27B10083D4CF /* train_jagger.cc in Sources */ = {isa = PBXBuildFile; fileRef = D18E2A1C2DCB27B10083D4CF /* train_jagger.cc */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		D1E908632DC3617D00B17A48 /* CopyFiles */ = {
+		D18E2A102DCB274C0083D4CF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -19,32 +23,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D1E908652DC3617D00B17A48 /* Jagger */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Jagger; sourceTree = BUILT_PRODUCTS_DIR; };
+		D18E2A122DCB274C0083D4CF /* train_jagger */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = train_jagger; sourceTree = BUILT_PRODUCTS_DIR; };
+		D18E2A1C2DCB27B10083D4CF /* train_jagger.cc */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = train_jagger.cc; sourceTree = "<group>"; };
+		D18E2A1E2DCB27E30083D4CF /* jagger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = jagger.h; path = Jagger/jagger.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		D1E908752DC4548B00B17A48 /* Exceptions for "Jagger" folder in "Jagger" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			additionalCompilerFlagsByRelativePath = {
-				main.cpp = "-w";
-			};
-			target = D1E908642DC3617D00B17A48 /* Jagger */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		D1E908672DC3617D00B17A48 /* Jagger */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				D1E908752DC4548B00B17A48 /* Exceptions for "Jagger" folder in "Jagger" target */,
-			);
-			path = Jagger;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
-		D1E908622DC3617D00B17A48 /* Frameworks */ = {
+		D18E2A0F2DCB274C0083D4CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -54,18 +39,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D1E9085C2DC3617D00B17A48 = {
+		D18E2A092DCB274C0083D4CF = {
 			isa = PBXGroup;
 			children = (
-				D1E908672DC3617D00B17A48 /* Jagger */,
-				D1E908662DC3617D00B17A48 /* Products */,
+				D18E2A1C2DCB27B10083D4CF /* train_jagger.cc */,
+				D18E2A1E2DCB27E30083D4CF /* jagger.h */,
+				D18E2A132DCB274C0083D4CF /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D1E908662DC3617D00B17A48 /* Products */ = {
+		D18E2A132DCB274C0083D4CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D1E908652DC3617D00B17A48 /* Jagger */,
+				D18E2A122DCB274C0083D4CF /* train_jagger */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,73 +59,71 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D1E908642DC3617D00B17A48 /* Jagger */ = {
+		D18E2A112DCB274C0083D4CF /* train_jagger */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D1E9086C2DC3617D00B17A48 /* Build configuration list for PBXNativeTarget "Jagger" */;
+			buildConfigurationList = D18E2A192DCB274C0083D4CF /* Build configuration list for PBXNativeTarget "train_jagger" */;
 			buildPhases = (
-				D1E908612DC3617D00B17A48 /* Sources */,
-				D1E908622DC3617D00B17A48 /* Frameworks */,
-				D1E908632DC3617D00B17A48 /* CopyFiles */,
+				D18E2A0E2DCB274C0083D4CF /* Sources */,
+				D18E2A0F2DCB274C0083D4CF /* Frameworks */,
+				D18E2A102DCB274C0083D4CF /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				D1E908672DC3617D00B17A48 /* Jagger */,
-			);
-			name = Jagger;
+			name = train_jagger;
 			packageProductDependencies = (
 			);
-			productName = Jagger;
-			productReference = D1E908652DC3617D00B17A48 /* Jagger */;
+			productName = train_jagger;
+			productReference = D18E2A122DCB274C0083D4CF /* train_jagger */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D1E9085D2DC3617D00B17A48 /* Project object */ = {
+		D18E2A0A2DCB274C0083D4CF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
-					D1E908642DC3617D00B17A48 = {
+					D18E2A112DCB274C0083D4CF = {
 						CreatedOnToolsVersion = 16.1;
 					};
 				};
 			};
-			buildConfigurationList = D1E908602DC3617D00B17A48 /* Build configuration list for PBXProject "Jagger" */;
+			buildConfigurationList = D18E2A0D2DCB274C0083D4CF /* Build configuration list for PBXProject "train_jagger" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = D1E9085C2DC3617D00B17A48;
+			mainGroup = D18E2A092DCB274C0083D4CF;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = D1E908662DC3617D00B17A48 /* Products */;
+			productRefGroup = D18E2A132DCB274C0083D4CF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D1E908642DC3617D00B17A48 /* Jagger */,
+				D18E2A112DCB274C0083D4CF /* train_jagger */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D1E908612DC3617D00B17A48 /* Sources */ = {
+		D18E2A0E2DCB274C0083D4CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D18E2A1D2DCB27B10083D4CF /* train_jagger.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		D1E9086A2DC3617D00B17A48 /* Debug */ = {
+		D18E2A172DCB274C0083D4CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -149,7 +133,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -196,12 +180,12 @@
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
-		D1E9086B2DC3617D00B17A48 /* Release */ = {
+		D18E2A182DCB274C0083D4CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -211,7 +195,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -252,31 +236,28 @@
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 			};
 			name = Release;
 		};
-		D1E9086D2DC3617D00B17A48 /* Debug */ = {
+		D18E2A1A2DCB274C0083D4CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		D1E9086E2DC3617D00B17A48 /* Release */ = {
+		D18E2A1B2DCB274C0083D4CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -284,25 +265,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D1E908602DC3617D00B17A48 /* Build configuration list for PBXProject "Jagger" */ = {
+		D18E2A0D2DCB274C0083D4CF /* Build configuration list for PBXProject "train_jagger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1E9086A2DC3617D00B17A48 /* Debug */,
-				D1E9086B2DC3617D00B17A48 /* Release */,
+				D18E2A172DCB274C0083D4CF /* Debug */,
+				D18E2A182DCB274C0083D4CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D1E9086C2DC3617D00B17A48 /* Build configuration list for PBXNativeTarget "Jagger" */ = {
+		D18E2A192DCB274C0083D4CF /* Build configuration list for PBXNativeTarget "train_jagger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1E9086D2DC3617D00B17A48 /* Debug */,
-				D1E9086E2DC3617D00B17A48 /* Release */,
+				D18E2A1A2DCB274C0083D4CF /* Debug */,
+				D18E2A1B2DCB274C0083D4CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D1E9085D2DC3617D00B17A48 /* Project object */;
+	rootObject = D18E2A0A2DCB274C0083D4CF /* Project object */;
 }
