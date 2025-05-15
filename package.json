@@ -7,12 +7,12 @@
   ],
   "license": "MIT",
   "repository": "https://github.com/miyako/Jagger",
-  "version": "20.0.2",
+  "version": "20.0.3",
   "tool": {
     "platform": "macos",
     "branch": "20.x",
     "version": "20.6",
     "build": "latest",
-    "arch": "arm" 
+    "arch": "arm"
   }
 }
